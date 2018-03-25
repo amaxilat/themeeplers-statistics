@@ -28,7 +28,7 @@ public class BaseController {
     GameEntryRepository gameEntryRepository;
     @Autowired
     BGGService bggService;
-    
+
     @ResponseBody
     @RequestMapping(value = "/api/plays", produces = "application/json")
     public Set<GamePlays> playsAPI() {
