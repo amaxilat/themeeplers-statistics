@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>GamePlays</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="dashboard.css" rel="stylesheet"/>
+</head>
+<body>
+
+
+<div th:fragment="group-badge" class="col-6 col-sm-12 col-md-3 placeholder">
+    <a th:href="${@environment.getProperty('app.group.url')}" style="text-decoration: none">
+        <img th:src="${@environment.getProperty('app.group.logo')}"
+             style="height:300px; width: 70%" class="img-fluid rounded-circle">
+        <h4 th:text="${@environment.getProperty('app.group.name')}"></h4>
+        <div class="text-muted"><span th:text="${totalcount}"> </span> games played</div>
+    </a>
+</div>
+
+<div th:fragment="game-badge" class="col-6 col-sm-12 col-md-3 placeholder">
+    <a th:href="${url}" style="text-decoration: none">
+        <img th:src="${image}"
+             style="height:300px; width: 70%" class="img-fluid rounded-circle"
+             alt="Generic placeholder thumbnail">
+        <h4 th:text="${name}">Label</h4>
+        <div class="text-muted"><span th:text="${count}"> </span> plays</div>
+    </a>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+</body>
+</html>
