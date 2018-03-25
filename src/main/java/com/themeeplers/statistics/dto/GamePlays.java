@@ -1,4 +1,4 @@
-package com.themeeplers.statistics.model;
+package com.themeeplers.statistics.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

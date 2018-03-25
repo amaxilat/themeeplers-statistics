@@ -1,5 +1,4 @@
-package com.themeeplers.statistics.model;
-
+package com.themeeplers.statistics.model.api.bgg.item;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,10 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @AllArgsConstructor
 @ToString
 @JsonIgnoreProperties(ignoreUnknown = true)
-@XmlRootElement(name = "items")
+@XmlRootElement(name = "averageweight")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public class ItemsList {
+public class ItemAverageWeight {
 
-    @JacksonXmlProperty(isAttribute = false, localName = "item")
-    private Item item;
+    @JacksonXmlProperty(isAttribute = true, localName = "value")
+    private Double value;
+
 }

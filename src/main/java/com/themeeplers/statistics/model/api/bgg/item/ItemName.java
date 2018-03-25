@@ -1,4 +1,4 @@
-package com.themeeplers.statistics.model;
+package com.themeeplers.statistics.model.api.bgg.item;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement(name = "name")
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public class Name {
+public class ItemName {
 
     @JacksonXmlProperty(isAttribute = true, localName = "type")
     private String type;

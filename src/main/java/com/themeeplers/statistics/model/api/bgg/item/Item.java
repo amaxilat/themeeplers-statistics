@@ -1,4 +1,4 @@
-package com.themeeplers.statistics.model;
+package com.themeeplers.statistics.model.api.bgg.item;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,11 +30,11 @@ public class Item {
 
     @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(isAttribute = false, localName = "name")
-    private Set<Name> names;
+    private Set<ItemName> names;
 
     @JacksonXmlProperty(isAttribute = false, localName = "image")
     private String image;
 
     @JacksonXmlProperty(isAttribute = false, localName = "statistics")
-    private BGGStatistics statistics;
+    private ItemStatistics statistics;
 }
