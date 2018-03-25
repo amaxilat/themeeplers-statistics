@@ -10,6 +10,7 @@ import com.themeeplers.statistics.service.BGGService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,6 +29,11 @@ public class BaseController {
     GameEntryRepository gameEntryRepository;
     @Autowired
     BGGService bggService;
+
+    @GetMapping(value = "/")
+    public String home(){
+        return "redirect:/plays";
+    }
 
     @ResponseBody
     @RequestMapping(value = "/api/plays", produces = "application/json")
