@@ -1,6 +1,6 @@
 package com.themeeplers.statistics.repository;
 
-import com.themeeplers.statistics.model.BGGGame;
+import com.themeeplers.statistics.model.db.BGGGame;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

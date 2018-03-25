@@ -1,4 +1,4 @@
-package com.themeeplers.statistics.model;
+package com.themeeplers.statistics.model.db;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,14 +16,11 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Entity(name = "bgg_game")
-public class BGGGame {
+@Entity
+public class GameEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Long bggId;
-    private String name;
-    private String image;
-    private Double weight;
-    private Double rating;
+    private Long date;
+    private String url;
 }
