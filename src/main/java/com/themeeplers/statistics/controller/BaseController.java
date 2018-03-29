@@ -1,13 +1,17 @@
 package com.themeeplers.statistics.controller;
 
+import com.themeeplers.statistics.model.api.meetup.EventGames;
 import com.themeeplers.statistics.model.db.BGGGame;
 import com.themeeplers.statistics.service.BGGService;
 import com.themeeplers.statistics.service.DBService;
+import com.themeeplers.statistics.service.MeetupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +21,8 @@ public class BaseController {
 
     @Autowired
     BGGService bggService;
+    @Autowired
+    MeetupService meetupService;
     @Autowired
     DBService dbService;
 
@@ -50,5 +56,11 @@ public class BaseController {
             }
         }
         return "plays";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getGames/{meetupId}")
+    public EventGames plays(Model model, @PathVariable("meetupId") final long meetupId) {
+        return meetupService.parseEvent(meetupId);
     }
 }
