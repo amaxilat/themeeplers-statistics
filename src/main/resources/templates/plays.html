@@ -18,18 +18,18 @@
                 <div th:replace="fragments:: game-badge"></div>
             </th:block>
             <th:block th:each="game : ${games}">
-                <th:block th:if="${game.weight==heavy}">
+                <th:block th:if="${game.value.weight==heavy}">
                     <th:block
-                            th:with="url=${game.url}, image=${game.image}, name=${game.name}, count=${heavy}">
-                        <div th:replace="fragments:: game-badge"></div>
+                            th:with="url=${game.key}, image=${game.value.image}, name=${game.value.name}, count=${heavy}">
+                        <div th:replace="fragments:: heavy-badge"></div>
                     </th:block>
                 </th:block>
             </th:block>
             <th:block th:each="game : ${games}">
-                <th:block th:if="${game.rating==rating}">
+                <th:block th:if="${game.value.rating==rating}">
                     <th:block
-                            th:with="url=${game.url}, image=${game.image}, name=${game.name}, count=${rating}">
-                        <div th:replace="fragments:: game-badge"></div>
+                            th:with="url=${game.key}, image=${game.value.image}, name=${game.value.name}, count=${rating}">
+                        <div th:replace="fragments:: rating-badge"></div>
                     </th:block>
                 </th:block>
             </th:block>
