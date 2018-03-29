@@ -61,6 +61,8 @@ public class BaseController {
     @ResponseBody
     @RequestMapping(value = "/getGames/{meetupId}")
     public EventGames plays(Model model, @PathVariable("meetupId") final long meetupId) {
-        return meetupService.parseEvent(meetupId);
+        final EventGames eventGames = meetupService.parseEvent(meetupId);
+        dbService.add(eventGames);
+        return eventGames;
     }
 }

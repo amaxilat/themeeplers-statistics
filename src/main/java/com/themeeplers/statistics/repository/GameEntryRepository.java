@@ -12,5 +12,7 @@ public interface GameEntryRepository extends JpaRepository<GameEntry, Long> {
     @Query("SELECT DISTINCT a.url FROM GameEntry a")
     List<String> findDistinctUrl();
 
+    long countByUrlAndDate(final String url, final String date);
+
     long countByUrl(String url);
 }

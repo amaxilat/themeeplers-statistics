@@ -3,12 +3,16 @@ package com.themeeplers.statistics.service;
 import com.themeeplers.statistics.dto.GamePlays;
 import com.themeeplers.statistics.model.api.bgg.item.Item;
 import com.themeeplers.statistics.model.api.bgg.item.ItemName;
+import com.themeeplers.statistics.model.api.meetup.EventGames;
 import com.themeeplers.statistics.model.db.BGGGame;
+import com.themeeplers.statistics.model.db.GameEntry;
 import com.themeeplers.statistics.repository.BGGGameRepository;
 import com.themeeplers.statistics.repository.GameEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -61,5 +65,18 @@ public class DBService {
             }
         }
         return bggGameRepository.save(newItem);
+    }
+
+    public void add(EventGames eventGames) {
+        final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        for (final String eventGame : eventGames.getEvents()) {
+            if (gameEntryRepository.countByUrlAndDate(eventGame, eventGames.getDate()) == 0) {
+                try {
+                    gameEntryRepository.save(new GameEntry(null, sdf.parse(eventGames.getDate()).getTime(), eventGame));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

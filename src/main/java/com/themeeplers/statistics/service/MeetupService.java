@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +25,7 @@ public class MeetupService {
     @Autowired
     GameEntryRepository gameEntryRepository;
 
-    @Value("${meetupKey}")
+    @Value("${app.meetupKey}")
     private String meetupKey;
 
     public Event getEvent(final long id) {
@@ -83,18 +85,4 @@ public class MeetupService {
         return new HashSet<>();
     }
 
-    public static void main(String[] args) {
-        MeetupService meetupService = new MeetupService();
-        EventGames event1 = meetupService.parseEvent(246292862);
-
-        EventGames event2 = meetupService.parseEvent(246292867);
-        System.out.println("event1:" + event1.getDate());
-        for (String s : event1.getEvents()) {
-            System.out.println(s);
-        }
-        System.out.println("event2:" + event2.getDate());
-        for (String s : event2.getEvents()) {
-            System.out.println(s);
-        }
-    }
 }
