@@ -61,15 +61,14 @@ public class MeetupService {
             }
         } catch (Exception e) {
         }
-        return new HashSet<>();
+        return links;
     }
 
     private Collection<? extends String> parseEventDescription(long id) {
         Set<String> links = new HashSet<>();
         try {
             Event event = getEvent(id);
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+            System.out.println(event.getDescription());
             String[] pParts = event.getDescription().split("<a href=\"");
             for (String pPart : pParts) {
                 if (pPart.contains("https")) {
@@ -78,11 +77,9 @@ public class MeetupService {
                     links.add(link);
                 }
             }
-            return links;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new HashSet<>();
+        return links;
     }
-
 }
