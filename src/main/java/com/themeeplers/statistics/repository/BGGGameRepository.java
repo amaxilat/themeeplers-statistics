@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 public interface BGGGameRepository extends PagingAndSortingRepository<BGGGame, Long> {
     BGGGame findByBggId(Long bggId);
 
-    @Query("SELECT max(a.weight)) FROM GameEntry a")
+    @Query("SELECT max(a.weight) FROM GameEntry a")
     BGGGame findTopOrderByWeightDesc();
 
-    @Query("SELECT max(a.rating)) FROM GameEntry a")
+    @Query("SELECT max(a.rating) FROM GameEntry a")
     BGGGame findTopOrderByRatingDesc();
 }
