@@ -70,12 +70,13 @@ public class DBService {
     public void add(EventGames eventGames) {
         final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         for (final String eventGame : eventGames.getEvents()) {
-            if (gameEntryRepository.countByUrlAndDate(eventGame, eventGames.getDate()) == 0) {
-                try {
-                    gameEntryRepository.save(new GameEntry(null, sdf.parse(eventGames.getDate()).getTime(), eventGame));
-                } catch (ParseException e) {
-                    e.printStackTrace();
+            try {
+                long time = sdf.parse(eventGames.getDate()).getTime();
+                if (gameEntryRepository.countByUrlAndDate(eventGame, time) == 0) {
+                    gameEntryRepository.save(new GameEntry(null, time, eventGame));
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
         }
     }
