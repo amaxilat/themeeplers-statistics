@@ -81,11 +81,11 @@ public class DBService {
         }
     }
 
-    public BGGGame mostHeavy() {
+    public Double mostHeavy() {
         return bggGameRepository.findTopOrderByWeightDesc();
     }
 
-    public BGGGame mostRating() {
+    public Double mostRating() {
         return bggGameRepository.findTopOrderByRatingDesc();
     }
 }
