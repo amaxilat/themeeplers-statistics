@@ -80,4 +80,12 @@ public class DBService {
             }
         }
     }
+
+    public BGGGame mostHeavy() {
+        return bggGameRepository.findTopOrderByWeightDesc();
+    }
+
+    public BGGGame mostRating() {
+        return bggGameRepository.findTopOrderByRatingDesc();
+    }
 }

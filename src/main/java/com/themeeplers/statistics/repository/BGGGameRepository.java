@@ -7,4 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BGGGameRepository extends JpaRepository<BGGGame, Long> {
     BGGGame findByBggId(Long bggId);
+
+    BGGGame findTopOrderByWeightDesc();
+
+    BGGGame findTopOrderByRatingDesc();
 }

@@ -38,6 +38,8 @@ public class BaseController {
         model.addAttribute("totalcount", dbService.countGames());
         model.addAttribute("games", gamesMap);
         model.addAttribute("plays", dbService.playCounts());
+        model.addAttribute("heavy", dbService.mostHeavy());
+        model.addAttribute("rating", dbService.mostRating());
         for (String s : dbService.games()) {
             if (s.startsWith("https://boardgamegeek.com/boardgame/") || s.startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
                 long id = Long.parseLong(s.split("/")[4]);
