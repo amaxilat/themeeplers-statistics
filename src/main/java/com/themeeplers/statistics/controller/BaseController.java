@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
@@ -32,7 +31,7 @@ public class BaseController {
     }
 
 
-    @RequestMapping(value = "/plays")
+    @GetMapping(value = "/plays")
     public String plays(Model model) {
         Map<String, BGGGame> gamesMap = new HashMap<>();
         model.addAttribute("totalcount", dbService.countGames());
@@ -61,7 +60,7 @@ public class BaseController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getGames/{meetupId}")
+    @GetMapping(value = "/getGames/{meetupId}")
     public EventGames plays(Model model, @PathVariable("meetupId") final long meetupId) {
         final EventGames eventGames = meetupService.parseEvent(meetupId);
         dbService.add(eventGames);
