@@ -12,6 +12,7 @@ app:
   meetupKey: test
   group:
     name: The Meeplers
+    subtitle: Patras Board Game Group
     url: //themeeplers.com
     logo: //scontent.fath2-1.fna.fbcdn.net/v/t1.0-9/26994370_539746619729562_7206357819986409634_n.jpg?_nc_cat=0&oh=ad65bced13bf2b7fbbf7de013cd52781&oe=5B38F944
 
