@@ -52,12 +52,16 @@
                     <tr>
                         <td th:text="${iterStat.index+1}">1</td>
                         <td th:if="${games[elem.url]}!=null">
-                            <a th:href="${elem.url}" th:text="${games[elem.url].name}"></a>
+                            <a th:href="${elem.url}">
+                                <img th:src="${games[elem.url].image}" style="width: 30px" />
+                                &nbsp;
+                                <span th:text="${games[elem.url].name}"></span>
+                            </a>
                         </td>
-                        <td th:unless="${games[elem.url]}!=null" th:text="${elem.url}">Lorem</td>
-                        <td th:text="${elem.count}">ipsum</td>
-                        <td th:text="${games[elem.url].weight}">ipsum</td>
-                        <td th:text="${games[elem.url].rating}">ipsum</td>
+                        <td th:unless="${games[elem.url]}!=null" th:text="${elem.url}"></td>
+                        <td th:text="${elem.count}"></td>
+                        <td th:text="${games[elem.url].weight}"></td>
+                        <td th:text="${games[elem.url].rating}"></td>
                     </tr>
                 </th:block>
                 </tbody>
