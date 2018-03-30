@@ -10,43 +10,59 @@
 <body>
 
 
-<div th:fragment="group-badge" class="col-xs-12 col-sm-4 col-md-3 ">
+<div th:fragment="group-badge" class="col-xs-12 col-sm-4 col-md-3" style="margin-top: 20px;">
     <a th:href="${@environment.getProperty('app.group.url')}" style="text-decoration: none">
-        <img th:src="${@environment.getProperty('app.group.logo')}"
-             class="img-fluid rounded-circle" style="height: 200px; width: 70%;">
-        <h4 th:text="${@environment.getProperty('app.group.name')}"></h4>
-        <div class="text-muted"><span th:text="${totalcount}"> </span> games played</div>
+        <div class="col-md-12">
+            <img th:src="${@environment.getProperty('app.group.logo')}"
+                 class="img-fluid rounded-circle" style="height: 200px; width: 70%;">
+        </div>
+        <div class="col-md-12" style="margin-top: 20px">
+            <h4 th:text="${@environment.getProperty('app.group.name')}"></h4>
+            <div class="text-muted"><span th:text="${totalcount}"> </span> games played</div>
+        </div>
     </a>
 </div>
 
-<div th:fragment="game-badge" class="col-xs-12 col-sm-4 col-md-3 ">
+<div th:fragment="game-badge" class="col-xs-12 col-sm-4 col-md-3 " style="margin-top: 20px;">
     <a th:href="${url}" style="text-decoration: none">
-        <img th:src="${image}"
-             class="img-fluid rounded-circle" style="height: 200px; width: 70%;"
-             alt="Generic placeholder thumbnail">
-        <h4 th:text="${name}">Label</h4>
-        <h4 class="text-muted">Most Played</h4>
-        <div class="text-muted"><span th:text="${count}"> </span> plays</div>
+        <div class="col-md-12">
+            <img th:src="${image}"
+                 class="img-fluid rounded-circle" style="height: 200px; width: 70%;"
+                 alt="Generic placeholder thumbnail">
+        </div>
+        <div class="col-md-12" style="margin-top: 20px">
+            <h4 th:text="${name}">Label</h4>
+            <h4 class="text-muted">Most Played</h4>
+            <div class="text-muted"><span th:text="${count}"> </span> plays</div>
+        </div>
     </a>
 </div>
-<div th:fragment="rating-badge" class="col-xs-12 col-sm-4 col-md-3 ">
+<div th:fragment="rating-badge" class="col-xs-12 col-sm-4 col-md-3 " style="margin-top: 20px;">
     <a th:href="${url}" style="text-decoration: none">
-        <img th:src="${image}"
-             class="img-fluid rounded-circle" style="height: 200px; width: 70%;"
-             alt="Generic placeholder thumbnail">
-        <h4 th:text="${name}">Label</h4>
-        <h4 class="text-muted">Highest Rated</h4>
-        <div class="text-muted">Rating: <span th:text="${count}"> </span></div>
+        <div class="col-md-12">
+            <img th:src="${image}"
+                 class="img-fluid rounded-circle" style="height: 200px; width: 70%;"
+                 alt="Generic placeholder thumbnail">
+        </div>
+        <div class="col-md-12" style="margin-top: 20px">
+            <h4 th:text="${name}">Label</h4>
+            <h4 class="text-muted">Highest Rated</h4>
+            <div class="text-muted">Rating: <span th:text="${count}"> </span></div>
+        </div>
     </a>
 </div>
-<div th:fragment="heavy-badge" class="col-xs-12 col-sm-4 col-md-3 ">
+<div th:fragment="heavy-badge" class="col-xs-12 col-sm-4 col-md-3 " style="margin-top: 20px;">
     <a th:href="${url}" style="text-decoration: none">
-        <img th:src="${image}"
-             class="img-fluid rounded-circle" style="height: 200px; width: 70%;"
-             alt="Generic placeholder thumbnail">
-        <h4 th:text="${name}">Label</h4>
-        <h4 class="text-muted">Heaviest</h4>
-        <div class="text-muted">Weight: <span th:text="${count}"> </span></div>
+        <div class="col-md-12">
+            <img th:src="${image}"
+                 class="img-fluid rounded-circle" style="height: 200px; width: 70%;"
+                 alt="Generic placeholder thumbnail">
+        </div>
+        <div class="col-md-12" style="margin-top: 20px">
+            <h4 th:text="${name}">Label</h4>
+            <h4 class="text-muted">Heaviest</h4>
+            <div class="text-muted">Weight: <span th:text="${count}"> </span></div>
+        </div>
     </a>
 </div>
 
