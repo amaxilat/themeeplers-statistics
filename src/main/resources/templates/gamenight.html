@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: headerFragment (pageTitle='GamePlays')">
+</head>
+
+<body>
+<div th:replace="navbar:: navbar-top"></div>
+<div class="container-fluid" style="margin-bottom: 200px; margin-top: 50px">
+
+    <main class="col-sm-10 offset-sm-1 col-md-8 offset-md-2">
+
+        <h2>Game Night <span th:text="${#dates.format(id, 'dd-MMM-yyyy')}"></span></h2>
+        <br/>
+        <br/>
+        <br/>
+        <div class="col-8">
+            <th:block th:each="elem : ${gameNight}">
+                <div class="media">
+                    <img img class="mr-3" th:src="${elem.image}" style="height: 100px"/>
+                    <div class="media-body">
+                        <a th:href="@{https://boardgamegeek.com/boardgame/}+${elem.bggId}">
+                            <h5 class="mt-0" th:text="${elem.name}">Media heading</h5>
+                        </a>
+                        Weight: <span th:text="${elem.weight}"></span>
+                        <br/>
+                        Rating: <span th:text="${elem.rating}"></span>
+                    </div>
+                </div>
+                <br/>
+            </th:block>
+        </div>
+    </main>
+</div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    heavy = /*[[${heavy}]]*/ "";
+    rating = /*[[${rating}]]*/ "";
+    /*]]>*/
+    $(document).ready(function () {
+        $('.table').DataTable();
+    })
+</script>
+</body>
+</html>

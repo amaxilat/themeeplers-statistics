@@ -59,6 +59,19 @@ public class BaseController {
         return "plays";
     }
 
+    @GetMapping(value = "/gamenights")
+    public String gamenights(Model model) {
+        model.addAttribute("gameNights", dbService.getGameNights());
+        return "gamenights";
+    }
+
+    @GetMapping(value = "/gamenights/{night}")
+    public String gamenights(Model model,@PathVariable("night") final Long night) {
+        model.addAttribute("id", night);
+        model.addAttribute("gameNight", dbService.getGameNight(night));
+        return "gamenight";
+    }
+
     @ResponseBody
     @GetMapping(value = "/getGames/{meetupId}")
     public EventGames plays(Model model, @PathVariable("meetupId") final long meetupId) {

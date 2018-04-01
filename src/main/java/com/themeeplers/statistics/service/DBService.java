@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 @Service
 public class DBService {
@@ -87,5 +85,32 @@ public class DBService {
 
     public Double mostRating() {
         return bggGameRepository.findTopOrderByRatingDesc();
+    }
+
+    public SortedMap<Long, Set<String>> getGameNights() {
+        final SortedMap<Long, Set<String>> events = new TreeMap<>((o1, o2) -> -o1.compareTo(o2));
+        for (final Long aLong : gameEntryRepository.findDistinctDate()) {
+            final Set<String> links = new HashSet<>();
+            for (final GameEntry gameEntry : gameEntryRepository.findByDate(aLong)) {
+                if (gameEntry.getUrl().startsWith("https://boardgamegeek.com/boardgame/") || gameEntry.getUrl().startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
+                    final long id = Long.parseLong(gameEntry.getUrl().split("/")[4]);
+                    final BGGGame entry = bggGameRepository.findByBggId(id);
+                    links.add(entry.getImage());
+                }
+            }
+            events.put(aLong, links);
+        }
+        return events;
+    }
+
+    public Set<BGGGame> getGameNight(final long time) {
+        final Set<BGGGame> games = new HashSet<>();
+        for (final GameEntry gameEntry : gameEntryRepository.findByDate(time)) {
+            if (gameEntry.getUrl().startsWith("https://boardgamegeek.com/boardgame/") || gameEntry.getUrl().startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
+                final long id = Long.parseLong(gameEntry.getUrl().split("/")[4]);
+                games.add(bggGameRepository.findByBggId(id));
+            }
+        }
+        return games;
     }
 }

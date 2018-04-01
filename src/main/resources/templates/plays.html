@@ -2,11 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base :: headerFragment (pageTitle='GamePlays')">
 </head>
+
 <body>
+<div th:replace="navbar:: navbar-top"></div>
+<div class="container-fluid" style="margin-bottom: 200px; margin-top: 50px">
 
-<div class="container-fluid" style="margin-bottom: 200px">
-
-    <main class="col-sm-10 offset-sm-1 col-md-10 offset-md-1">
+<main class="col-sm-10 offset-sm-1 col-md-8 offset-md-2">
         <h1><span th:text="${@environment.getProperty('app.group.name')}"> </span> <small class="text-muted">(<span th:text="${@environment.getProperty('app.group.subtitle')}"></span>)</small>  gaming statistics</h1>
 
         <section class="row text-center placeholders">
