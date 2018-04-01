@@ -56,12 +56,14 @@ public class BaseController {
                 }
             }
         }
+        model.addAttribute("page", "plays");
         return "plays";
     }
 
     @GetMapping(value = "/gamenights")
     public String gamenights(Model model) {
         model.addAttribute("gameNights", dbService.getGameNights());
+        model.addAttribute("page", "gamenights");
         return "gamenights";
     }
 
@@ -69,6 +71,7 @@ public class BaseController {
     public String gamenights(Model model,@PathVariable("night") final Long night) {
         model.addAttribute("id", night);
         model.addAttribute("gameNight", dbService.getGameNight(night));
+        model.addAttribute("page", "gamenight");
         return "gamenight";
     }
 
