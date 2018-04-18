@@ -1,4 +1,4 @@
-version: '3.2'
+version: '3.4'
 services:
     mariadb_statistics:
         image: 'mariadb'
@@ -12,22 +12,28 @@ services:
             MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
         volumes:
             - /srv/themeeplers/statistics/mariadb:/var/lib/mysql/
-        ports:
-            - "3306:3306"
         deploy:
             mode: replicated
             replicas: 1
-    #app_statistics:
-        #image: 'qopbot/jre8-base:1.0'
-        #networks:
-            #- statistics_net
-        #volumes:
-            #- ./server.jar:/server.jar
-        #ports:
-            #- "8080:8080"
-        #deploy:
-            #mode: replicated
-            #replicas: 1
+    app_statistics:
+        image: 'qopbot/jre8-base:1.0'
+        dns:
+          - 8.8.8.8
+          - 127.0.0.11
+        networks:
+          - statistics_net
+        volumes:
+            - /srv/themeeplers/statistics/server.jar:/server.jar
+        secrets:
+          - themeeplers-statistics-meetupKey
+        ports:
+          - "10000:8080"
+        deploy:
+            mode: replicated
+            replicas: 1
+secrets:
+  themeeplers-statistics-meetupKey:
+    external: true
 
 networks:
     statistics_net:
