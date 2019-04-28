@@ -1,6 +1,8 @@
 package com.themeeplers.statistics.service;
 
+import com.themeeplers.statistics.dto.GameDto;
 import com.themeeplers.statistics.dto.GamePlays;
+import com.themeeplers.statistics.dto.GamePlaysDto;
 import com.themeeplers.statistics.model.api.bgg.item.Item;
 import com.themeeplers.statistics.model.api.bgg.item.ItemName;
 import com.themeeplers.statistics.model.api.meetup.EventGames;
@@ -13,7 +15,12 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 @Service
 public class DBService {
@@ -34,6 +41,21 @@ public class DBService {
         return map;
     }
 
+    public Set<GamePlaysDto> playCounts2() {
+        final Set<GamePlaysDto> gamePlays = new TreeSet<>();
+        for (final String s : gameEntryRepository.findDistinctUrl()) {
+
+            if (s.startsWith("https://boardgamegeek.com/boardgame/") || s.startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
+                long id = Long.parseLong(s.split("/")[4]);
+                BGGGame item = findByBggId(id);
+                GameDto d = new GameDto(item.getBggId(), item.getName(), item.getImage(), item.getWeight(), item.getRating());
+                gamePlays.add(new GamePlaysDto(gameEntryRepository.countByUrl(s), d));
+
+            }
+        }
+        return gamePlays;
+    }
+
     public List<String> games() {
         return gameEntryRepository.findDistinctUrl();
     }
@@ -49,7 +71,8 @@ public class DBService {
     public BGGGame findInBggAndStore(long id) {
         final Item game = bggService.getGame(id).getItem();
 
-        if (game == null) return null;
+        if (game == null)
+            return null;
 
         final BGGGame newItem = new BGGGame();
 
@@ -83,8 +106,15 @@ public class DBService {
         return bggGameRepository.findTopOrderByWeightDesc();
     }
 
+    public BGGGame mostHeavyGame() {
+        return bggGameRepository.findTopGameOrderByWeightDesc();
+    }
+
     public Double mostRating() {
         return bggGameRepository.findTopOrderByRatingDesc();
+    }
+    public BGGGame mostRatingGame() {
+        return bggGameRepository.findTopGameOrderByRatingDesc();
     }
 
     public SortedMap<Long, Set<String>> getGameNights() {

@@ -25,11 +25,11 @@ public class BaseController {
     @Autowired
     DBService dbService;
 
-    @GetMapping(value = "/")
-    public String home() {
-        return "redirect:/plays";
-    }
-
+//    @GetMapping(value = "/")
+//    public String home() {
+//        return "redirect:/plays";
+//    }
+//
 
     @GetMapping(value = "/plays")
     public String plays(Model model) {
