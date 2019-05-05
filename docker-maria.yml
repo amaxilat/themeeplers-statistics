@@ -1,0 +1,18 @@
+version: '3.2'
+services:
+    mariadb_statistics:
+        image: 'mariadb'
+        ports:
+            - 3306:3306
+        environment:
+            ALLOW_EMPTY_PASSWORD: 'no'
+            MYSQL_DATABASE: 'statistics'
+            MYSQL_USER: 'statuser'
+            MYSQL_PASSWORD: 'statpass'
+            MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+        volumes:
+            - /srv/themeeplers/statistics/mariadb:/var/lib/mysql/
+        deploy:
+            mode: replicated
+            replicas: 1
+
