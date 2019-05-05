@@ -1,0 +1,33 @@
+<h1>
+  Game Nights
+</h1>
+
+<section class="row text-center placeholders">
+</section>
+
+
+<!-- Employees list table, it hides when there is no employee -->
+<div *ngIf="GameNight.length !== 0">
+  <h3 class="mb-3 text-center"></h3>
+  <div class="col-md-12">
+    <table datatable class="table table-striped dataTable no-footer">
+      <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Games</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let gameNight of GameNight">
+        <td>
+          <a href="/gamenights/{{gameNight.date}}">
+            {{gameNight.date| date:'yyyy-MM-dd'}}</a>
+        </td>
+        <td>
+          <img *ngFor="let game of gameNight.games" src="{{game.image}}" style="height:30px"/>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+<h1>
+  BoardGame Statistics
+</h1>
+
+<section class="row text-center placeholders">
+</section>
+
+<section class="row text-center placeholders">
+
+  <div class="col-xs-12 col-sm-4 col-md-3" style="margin-top: 20px;">
+    <a href="//themeeplers.com" style="text-decoration: none">
+      <div class="col-md-12">
+        <img
+          src="https://scontent.fath3-3.fna.fbcdn.net/v/t1.0-9/26994370_539746619729562_7206357819986409634_n.jpg?_nc_cat=106&_nc_ht=scontent.fath3-3.fna&oh=e2bdbfd24649e209aa8f67eafa8332d4&oe=5D62AF44"
+          class="img-fluid rounded-circle" style="height: 150px; width: 60%;">
+      </div>
+      <div class="col-md-12" style="margin-top: 20px">
+        <h4>The Meeplers</h4>
+        <div class="text-muted"><span>{{General.totalCount}}</span> games played</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xs-12 col-sm-4 col-md-3 " style="margin-top: 20px;">
+    <a href="https://boardgamegeek.com/boardgame/{{General.topPlays.bggId}}" style="text-decoration: none">
+      <div class="col-md-12">
+        <img src="{{General.topPlays.image}}"
+             class="img-fluid rounded-circle" style="height: 150px; width: 60%;" alt="Generic placeholder thumbnail">
+      </div>
+      <div class="col-md-12" style="margin-top: 20px">
+        <h4>{{General.topPlays.name}}</h4>
+        <h4 class="text-muted">Most Played</h4>
+        <div class="text-muted"><span>{{General.topPlays.plays}}</span> plays</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xs-12 col-sm-4 col-md-3 " style="margin-top: 20px;">
+    <a href="https://boardgamegeek.com/boardgame/{{General.topWeight.bggId}}" style="text-decoration: none">
+      <div class="col-md-12">
+        <img src="{{General.topWeight.image}}"
+             class="img-fluid rounded-circle" style="height: 150px; width: 60%;" alt="Generic placeholder thumbnail">
+      </div>
+      <div class="col-md-12" style="margin-top: 20px">
+        <h4>{{General.topWeight.name}}</h4>
+        <h4 class="text-muted">Heaviest</h4>
+        <div class="text-muted">Weight: <span>{{General.topWeight.weight}}</span></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-xs-12 col-sm-4 col-md-3 " style="margin-top: 20px;">
+    <a href="https://boardgamegeek.com/boardgame/{{General.topRating.bggId}}" style="text-decoration: none">
+      <div class="col-md-12">
+        <img src="{{General.topRating.image}}"
+             class="img-fluid rounded-circle" style="height: 150px; width: 60%;" alt="Generic placeholder thumbnail">
+      </div>
+      <div class="col-md-12" style="margin-top: 20px">
+        <h4>{{General.topRating.name}}</h4>
+        <h4 class="text-muted">Highest Rated</h4>
+        <div class="text-muted">Rating: <span>{{General.topRating.rating}}</span></div>
+      </div>
+    </a>
+  </div>
+
+</section>
+
+<h2>Full Rankings</h2>
+<div *ngIf="Plays.length !== 0">
+  <h3 class="mb-3 text-center"></h3>
+  <div class="col-md-12">
+
+    <table datatable class="table table-striped dataTable no-footer">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Game Name</th>
+        <th>Plays</th>
+        <th>Weight</th>
+        <th>Rating</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let play of Plays">
+        <td>1</td>
+        <td>
+          <img src="{{play.game.image}}" style="width: 30px">
+          &nbsp;
+          <a href="https://boardgamegeek.com/boardgame/{{play.game.bggId}}">
+            <span>{{play.game.name}}</span>
+          </a>
+        </td>
+        <td>{{play.count}}</td>
+        <td>{{play.game.weight}}</td>
+        <td>{{play.game.rating}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
