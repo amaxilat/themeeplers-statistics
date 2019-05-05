@@ -8,10 +8,12 @@ import com.themeeplers.statistics.service.DBService;
 import com.themeeplers.statistics.service.MeetupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.stream.Collectors;
 
 @RestController
 public class BaseRestController {
@@ -40,6 +42,11 @@ public class BaseRestController {
     @GetMapping(value = "/api/gamenight")
     public SortedSet<GameNightDto> gamenights() {
         return dbService.getGameNights2();
+    }
+
+    @GetMapping(value = "/api/gamenight/{time}")
+    public GameNightDto gamenights(@PathVariable("time") final long time) {
+        return dbService.getGameNights2().stream().filter(gameNightDto -> gameNightDto.getDate() == time).collect(Collectors.toSet()).iterator().next();
     }
 
     @GetMapping(value = "/api/stats/plays", produces = "application/json")
