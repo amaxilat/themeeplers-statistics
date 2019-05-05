@@ -9,6 +9,7 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GeneraStatsDto {
     private long totalCount;
-    private GameDto heavy;
-    private GameDto rating;
+    private GameDto topWeight;
+    private GameDto topRating;
+    private GameDto topPlays;
 }

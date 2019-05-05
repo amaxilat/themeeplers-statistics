@@ -50,7 +50,7 @@ public class DBService {
             if (s.startsWith("https://boardgamegeek.com/boardgame/") || s.startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
                 long id = Long.parseLong(s.split("/")[4]);
                 BGGGame item = findByBggId(id);
-                GameDto d = new GameDto(item.getBggId(), item.getName(), item.getImage(), item.getWeight(), item.getRating());
+                GameDto d = GameDto.builder().bggId(item.getBggId()).name(item.getName()).image(item.getImage()).weight(item.getWeight()).rating(item.getRating()).build();
                 gamePlays.add(new GamePlayDto(gameEntryRepository.countByUrl(s), d));
 
             }
@@ -120,6 +120,10 @@ public class DBService {
         return bggGameRepository.findTopGameOrderByRatingDesc();
     }
 
+    public BGGGame mostPlays() {
+        return bggGameRepository.findTopGameOrderByRatingDesc();
+    }
+
     public SortedMap<Long, Set<String>> getGameNights() {
         final SortedMap<Long, Set<String>> events = new TreeMap<>((o1, o2) -> -o1.compareTo(o2));
         for (final Long aLong : gameEntryRepository.findDistinctDate()) {
@@ -139,15 +143,15 @@ public class DBService {
     public SortedSet<GameNightDto> getGameNights2() {
         final SortedSet<GameNightDto> events = new TreeSet<>((o1, o2) -> -o1.compareTo(o2));
         for (final Long aLong : gameEntryRepository.findDistinctDate()) {
-            final Set<String> links = new HashSet<>();
+            final Set<GameDto> links = new HashSet<>();
             for (final GameEntry gameEntry : gameEntryRepository.findByDate(aLong)) {
                 if (gameEntry.getUrl().startsWith("https://boardgamegeek.com/boardgame/") || gameEntry.getUrl().startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
                     final long id = Long.parseLong(gameEntry.getUrl().split("/")[4]);
                     final BGGGame entry = bggGameRepository.findByBggId(id);
-                    links.add(entry.getImage());
+                    links.add(GameDto.builder().bggId(entry.getBggId()).image(entry.getImage()).name(entry.getName()).rating(entry.getRating()).weight(entry.getWeight()).build());
                 }
             }
-            events.add(GameNightDto.builder().date(aLong).build());
+            events.add(GameNightDto.builder().date(aLong).games(links).build());
         }
         return events;
     }
@@ -161,5 +165,14 @@ public class DBService {
             }
         }
         return games;
+    }
+
+    public GameDto getGame(String url) {
+        if (url.startsWith("https://boardgamegeek.com/boardgame/") || url.startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
+            final long id = Long.parseLong(url.split("/")[4]);
+            final BGGGame entry = bggGameRepository.findByBggId(id);
+            return GameDto.builder().bggId(entry.getBggId()).image(entry.getImage()).name(entry.getName()).rating(entry.getRating()).weight(entry.getWeight()).build();
+        }
+        return null;
     }
 }
