@@ -1,8 +1,9 @@
 package com.themeeplers.statistics.service;
 
 import com.themeeplers.statistics.dto.GameDto;
-import com.themeeplers.statistics.dto.GamePlays;
+import com.themeeplers.statistics.dto.GameNightDto;
 import com.themeeplers.statistics.dto.GamePlayDto;
+import com.themeeplers.statistics.dto.GamePlays;
 import com.themeeplers.statistics.model.api.bgg.item.Item;
 import com.themeeplers.statistics.model.api.bgg.item.ItemName;
 import com.themeeplers.statistics.model.api.meetup.EventGames;
@@ -19,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedMap;
+import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -113,6 +115,7 @@ public class DBService {
     public Double mostRating() {
         return bggGameRepository.findTopOrderByRatingDesc();
     }
+
     public BGGGame mostRatingGame() {
         return bggGameRepository.findTopGameOrderByRatingDesc();
     }
@@ -129,6 +132,22 @@ public class DBService {
                 }
             }
             events.put(aLong, links);
+        }
+        return events;
+    }
+
+    public SortedSet<GameNightDto> getGameNights2() {
+        final SortedSet<GameNightDto> events = new TreeSet<>((o1, o2) -> -o1.compareTo(o2));
+        for (final Long aLong : gameEntryRepository.findDistinctDate()) {
+            final Set<String> links = new HashSet<>();
+            for (final GameEntry gameEntry : gameEntryRepository.findByDate(aLong)) {
+                if (gameEntry.getUrl().startsWith("https://boardgamegeek.com/boardgame/") || gameEntry.getUrl().startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
+                    final long id = Long.parseLong(gameEntry.getUrl().split("/")[4]);
+                    final BGGGame entry = bggGameRepository.findByBggId(id);
+                    links.add(entry.getImage());
+                }
+            }
+            events.add(GameNightDto.builder().date(aLong).build());
         }
         return events;
     }
