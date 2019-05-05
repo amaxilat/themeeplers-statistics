@@ -1,9 +1,8 @@
 package com.themeeplers.statistics.controller;
 
-import com.themeeplers.statistics.dto.GameDto;
+import com.themeeplers.statistics.dto.GameNightDto;
 import com.themeeplers.statistics.dto.GamePlayDto;
 import com.themeeplers.statistics.dto.GeneraStatsDto;
-import com.themeeplers.statistics.model.db.BGGGame;
 import com.themeeplers.statistics.service.BGGService;
 import com.themeeplers.statistics.service.DBService;
 import com.themeeplers.statistics.service.MeetupService;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
+import java.util.SortedSet;
 
 @RestController
 public class BaseRestController {
@@ -27,15 +27,20 @@ public class BaseRestController {
     public GeneraStatsDto statsGeneral() {
         GeneraStatsDto.GeneraStatsDtoBuilder builder = GeneraStatsDto.builder();
         builder.totalCount(dbService.countGames());
-//        BGGGame d = dbService.mostHeavyGame();
-//        GameDto heavy = new GameDto(d.getBggId(), d.getName(), d.getImage(), d.getWeight(), d.getRating());
-//        builder.heavy(heavy);
-//        BGGGame r = dbService.mostRatingGame();
-//        GameDto rating = new GameDto(r.getBggId(), r.getName(), r.getImage(), r.getWeight(), r.getRating());
-//        builder.rating(rating);
+        //        BGGGame d = dbService.mostHeavyGame();
+        //        GameDto heavy = new GameDto(d.getBggId(), d.getName(), d.getImage(), d.getWeight(), d.getRating());
+        //        builder.heavy(heavy);
+        //        BGGGame r = dbService.mostRatingGame();
+        //        GameDto rating = new GameDto(r.getBggId(), r.getName(), r.getImage(), r.getWeight(), r.getRating());
+        //        builder.rating(rating);
         return builder.build();
     }
 
+
+    @GetMapping(value = "/api/gamenight")
+    public SortedSet<GameNightDto> gamenights() {
+        return dbService.getGameNights2();
+    }
 
     @GetMapping(value = "/api/stats/plays", produces = "application/json")
     public Set<GamePlayDto> statsPlays() {
