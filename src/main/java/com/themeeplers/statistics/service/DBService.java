@@ -2,7 +2,7 @@ package com.themeeplers.statistics.service;
 
 import com.themeeplers.statistics.dto.GameDto;
 import com.themeeplers.statistics.dto.GamePlays;
-import com.themeeplers.statistics.dto.GamePlaysDto;
+import com.themeeplers.statistics.dto.GamePlayDto;
 import com.themeeplers.statistics.model.api.bgg.item.Item;
 import com.themeeplers.statistics.model.api.bgg.item.ItemName;
 import com.themeeplers.statistics.model.api.meetup.EventGames;
@@ -41,15 +41,15 @@ public class DBService {
         return map;
     }
 
-    public Set<GamePlaysDto> playCounts2() {
-        final Set<GamePlaysDto> gamePlays = new TreeSet<>();
+    public Set<GamePlayDto> playCounts2() {
+        final Set<GamePlayDto> gamePlays = new TreeSet<>();
         for (final String s : gameEntryRepository.findDistinctUrl()) {
 
             if (s.startsWith("https://boardgamegeek.com/boardgame/") || s.startsWith("https://boardgamegeek.com/boardgameexpansion/")) {
                 long id = Long.parseLong(s.split("/")[4]);
                 BGGGame item = findByBggId(id);
                 GameDto d = new GameDto(item.getBggId(), item.getName(), item.getImage(), item.getWeight(), item.getRating());
-                gamePlays.add(new GamePlaysDto(gameEntryRepository.countByUrl(s), d));
+                gamePlays.add(new GamePlayDto(gameEntryRepository.countByUrl(s), d));
 
             }
         }

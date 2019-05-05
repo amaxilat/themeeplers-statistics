@@ -11,12 +11,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class GamePlaysDto implements Comparable<GamePlaysDto> {
+public class GamePlayDto implements Comparable<GamePlayDto> {
     private Long count;
     private GameDto game;
 
     @Override
-    public int compareTo(GamePlaysDto o) {
+    public int compareTo(GamePlayDto o) {
         int diff = o.getCount().compareTo(getCount());
         if (diff == 0) {
             return o.getGame().compareTo(getGame());
